@@ -1,0 +1,10 @@
+E:\windows 8 & c#\openBuilding\openBuilding\bin\openBuilding.dll
+E:\windows 8 & c#\openBuilding\openBuilding\bin\openBuilding.pdb
+E:\windows 8 & c#\openBuilding\openBuilding\obj\Debug\openBuilding.csprojResolveAssemblyReference.cache
+E:\windows 8 & c#\openBuilding\openBuilding\obj\Debug\openBuilding.dll
+E:\windows 8 & c#\openBuilding\openBuilding\obj\Debug\openBuilding.pdb
+E:\projects\typescript\openBuilding\openBuilding\bin\openBuilding.dll
+E:\projects\typescript\openBuilding\openBuilding\bin\openBuilding.pdb
+E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.csprojResolveAssemblyReference.cache
+E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.dll
+E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.pdb
