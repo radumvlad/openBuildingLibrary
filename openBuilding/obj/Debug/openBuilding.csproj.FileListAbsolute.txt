@@ -8,3 +8,8 @@ E:\projects\typescript\openBuilding\openBuilding\bin\openBuilding.pdb
 E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.csprojResolveAssemblyReference.cache
 E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.dll
 E:\projects\typescript\openBuilding\openBuilding\obj\Debug\openBuilding.pdb
+E:\projects\typescript\openBuildingLibrary\openBuilding\bin\openBuilding.dll
+E:\projects\typescript\openBuildingLibrary\openBuilding\bin\openBuilding.pdb
+E:\projects\typescript\openBuildingLibrary\openBuilding\obj\Debug\openBuilding.csprojResolveAssemblyReference.cache
+E:\projects\typescript\openBuildingLibrary\openBuilding\obj\Debug\openBuilding.dll
+E:\projects\typescript\openBuildingLibrary\openBuilding\obj\Debug\openBuilding.pdb

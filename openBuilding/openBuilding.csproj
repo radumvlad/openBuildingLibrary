@@ -19,6 +19,9 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="jquery.d.ts" />
+    <TypeScriptCompile Include="objects.ts" />
+    <TypeScriptCompile Include="obview.ts" />
+    <TypeScriptCompile Include="obedit.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -5,11 +5,32 @@
     <meta charset="utf-8" />
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="objects.js"></script>
+    <script src="obview.js"></script>
+    <script src="obedit.js"></script>
+
     <script src="app.js"></script>
 </head>
 <body>
-     <canvas id="openCanvas" width="1000" height="500"  style="border:1px solid #000000;"></canvas> 
-     <canvas id="Canvas1" width="1000" height="500"  style="border:1px solid #000000;"></canvas> 
-     <div id="openBuilding" style="display:none"></div>
+    <div>
+        <a href="javascript:void(0)" onclick="change('select')">select</a>
+        <a href="javascript:void(0)" onclick="change('move')">move</a>
+        <a href="javascript:void(0)" onclick="change('erase')">erase</a>
+    </div>
+    <div>
+        <a href="javascript:void(0)" onclick="change('add_wall')">add wall</a>
+        <a href="javascript:void(0)" onclick="change('add_sup')">add stairs up</a>
+        <a href="javascript:void(0)" onclick="change('add_sdown')">add stairs down</a>
+        <a href="javascript:void(0)" onclick="change('add_sboth')">add stairs both</a>
+        <a href="javascript:void(0)" onclick="change('add_door')">add door</a>
+        <a href="javascript:void(0)" onclick="change('add_edoor')">add exit door</a>
+        <a href="javascript:void(0)" onclick="change('add_label')">add label</a>
+        <input type="text" id="label_text" onkeypress="setLabelText(event)" />
+    </div>
+
+
+
+
+    <canvas id="editCanvas" width="1000" height="500" style="border: 1px solid #000000;"></canvas>
 </body>
 </html>
