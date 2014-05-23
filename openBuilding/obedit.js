@@ -42,22 +42,22 @@ var EditableBuilding = (function (_super) {
             var y2 = (this.objects[i].info.y2 - this.frame.Y1) * this.scaleFactor;
 
             if (this.objects[i].kind == "wall") {
-                if (distPtoP(X, Y, x1, y1) < 10) {
+                if (BasicGeometry.distPtoP(X, Y, x1, y1) < 10) {
                     it = i;
                     this.selectedEdge = 1;
                     break;
-                } else if (distPtoP(X, Y, x2, y2) < 10) {
+                } else if (BasicGeometry.distPtoP(X, Y, x2, y2) < 10) {
                     it = i;
                     this.selectedEdge = 2;
                     break;
-                } else if (distPtoSeg(X, Y, x1, y1, x2, y2) < 7) {
+                } else if (BasicGeometry.distPtoSeg(X, Y, x1, y1, x2, y2) < 7) {
                     it = i;
                     this.selectedEdge = 0;
                     this.initialSelectX = X;
                     this.initialSelectY = Y;
                     break;
                 }
-            } else if (isPrettyClose(this.objects[i], X - x1, Y - y1)) {
+            } else if (BasicGeometry.isPrettyClose(this.objects[i], X - x1, Y - y1)) {
                 it = i;
                 break;
             }
@@ -132,10 +132,10 @@ var EditableBuilding = (function (_super) {
                 var y1 = (this.objects[i].info.y1 - this.frame.Y1) * this.scaleFactor;
                 var y2 = (this.objects[i].info.y2 - this.frame.Y1) * this.scaleFactor;
 
-                if (this.objects[i].kind == "wall" && (distPtoSeg(X, Y, x1, y1, x2, y2) < 7)) {
+                if (this.objects[i].kind == "wall" && (BasicGeometry.distPtoSeg(X, Y, x1, y1, x2, y2) < 7)) {
                     it = i;
                     break;
-                } else if (isPrettyClose(this.objects[i], X - x1, Y - y1)) {
+                } else if (BasicGeometry.isPrettyClose(this.objects[i], X - x1, Y - y1)) {
                     it = i;
                     break;
                 }
@@ -244,71 +244,34 @@ var EditableBuilding = (function (_super) {
     return EditableBuilding;
 })(Building);
 
-function change(action) {
-    if (action == "select") {
-        myEditableBuilding.mode = "select";
-    } else if (action == "move") {
-        myEditableBuilding.mode = "move";
-    } else if (action == "erase") {
-        myEditableBuilding.mode = "erase";
-    } else if (action == "add_wall") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Wall();
-    } else if (action == "add_sup") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Stair();
-        myEditableBuilding.newObject.type = "up";
-    } else if (action == "add_sdown") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Stair();
-        myEditableBuilding.newObject.type = "down";
-    } else if (action == "add_sboth") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Stair();
-        myEditableBuilding.newObject.type = "both";
-    } else if (action == "add_door") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Door();
-        myEditableBuilding.newObject.type = "normal";
-    } else if (action == "add_edoor") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Door();
-        myEditableBuilding.newObject.type = "exit";
-    } else if (action == "add_label") {
-        myEditableBuilding.mode = "add";
-        myEditableBuilding.newObject = new Label();
+var BasicGeometry = (function () {
+    function BasicGeometry() {
     }
-}
+    BasicGeometry.isPrettyClose = function (object, x, y) {
+        if (x < object.width * 0.4 && x > -object.width * 0.4 && y < object.height * 0.4 && y > -object.height * 0.4)
+            return true;
+    };
 
-function isPrettyClose(object, x, y) {
-    if (x < object.width * 0.4 && x > -object.width * 0.4 && y < object.height * 0.4 && y > -object.height * 0.4)
-        return true;
-}
+    BasicGeometry.distPtoP = function (x1, y1, x2, y2) {
+        return Math.sqrt(BasicGeometry.distFormula(x1, y1, x2, y2));
+    };
 
-function distPtoP(x1, y1, x2, y2) {
-    return Math.sqrt(distFormula(x1, y1, x2, y2));
-}
+    BasicGeometry.distFormula = function (x1, y1, x2, y2) {
+        return Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
+    };
 
-function distFormula(x1, y1, x2, y2) {
-    return Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
-}
+    BasicGeometry.distPtoSeg = function (x, y, x1, y1, x2, y2) {
+        var l2 = BasicGeometry.distFormula(x1, y1, x2, y2);
+        if (l2 == 0)
+            return BasicGeometry.distPtoP(x, y, x1, y1);
 
-function distPtoSeg(x, y, x1, y1, x2, y2) {
-    var l2 = distFormula(x1, y1, x2, y2);
-    if (l2 == 0)
-        return distPtoP(x, y, x1, y1);
-
-    var t = ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / l2;
-    if (t < 0)
-        return distPtoP(x, y, x1, y1);
-    if (t > 1)
-        return distPtoP(x, y, x2, y2);
-    return distPtoP(x, y, x1 + t * (x2 - x1), y1 + t * (y2 - y1));
-}
-
-function setLabelText(e) {
-    if (e.keyCode == 13 && myEditableBuilding.newObject && myEditableBuilding.newObject.kind == "label") {
-        myEditableBuilding.newObject.text = document.getElementById("label_text").value;
-    }
-}
+        var t = ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / l2;
+        if (t < 0)
+            return BasicGeometry.distPtoP(x, y, x1, y1);
+        if (t > 1)
+            return BasicGeometry.distPtoP(x, y, x2, y2);
+        return BasicGeometry.distPtoP(x, y, x1 + t * (x2 - x1), y1 + t * (y2 - y1));
+    };
+    return BasicGeometry;
+})();
 //# sourceMappingURL=obedit.js.map

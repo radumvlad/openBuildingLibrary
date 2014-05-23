@@ -13,6 +13,58 @@ function init() {
 
 }
 
+function change(action) {
+    if (action == "select") {
+        myEditableBuilding.mode = "select";
+    }
+    else if (action == "move") {
+        myEditableBuilding.mode = "move";
+    }
+    else if (action == "erase") {
+        myEditableBuilding.mode = "erase";
+    }
+    else if (action == "add_wall") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Wall();
+    }
+    else if (action == "add_sup") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Stair();
+        myEditableBuilding.newObject.type = "up";
+    }
+    else if (action == "add_sdown") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Stair();
+        myEditableBuilding.newObject.type = "down";
+    }
+    else if (action == "add_sboth") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Stair();
+        myEditableBuilding.newObject.type = "both";
+    }
+    else if (action == "add_door") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Door();
+        myEditableBuilding.newObject.type = "normal";
+    }
+    else if (action == "add_edoor") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Door();
+        myEditableBuilding.newObject.type = "exit";
+    }
+    else if (action == "add_label") {
+        myEditableBuilding.mode = "add";
+        myEditableBuilding.newObject = new Label();
+    }
+}
+
+function setLabelText(e) {
+    if (e.keyCode == 13 && myEditableBuilding.newObject && myEditableBuilding.newObject.kind == "label") {
+        myEditableBuilding.newObject.text = (<HTMLInputElement>document.getElementById("label_text")).value;
+    }
+}
+
+
 window.onload = function () {
     init();
 };
