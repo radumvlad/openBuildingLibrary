@@ -180,6 +180,10 @@ var Building = (function () {
         this.moving = false;
     };
 
+    Building.prototype.destroy = function () {
+        buildingList[this['id']] = null;
+    };
+
     Building.scroll = function (event) {
         var building = buildingList[this['id']];
 

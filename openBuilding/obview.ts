@@ -209,6 +209,10 @@ class Building {
         this.moving = false;
     }
 
+    destroy() {
+        buildingList[this['id']] = null;
+    }
+
     static scroll(event) {
         var building = buildingList[this['id']];
 

@@ -177,6 +177,11 @@ var EditableBuilding = (function (_super) {
             this.selectedObject.draw(this.canvas, this.frame, this.scaleFactor);
     };
 
+    EditableBuilding.prototype.destroy = function () {
+        buildingList[this['id']] = null;
+        myEditableBuilding = null;
+    };
+
     EditableBuilding.mouse_down = function (event) {
         //due to offsetX not working in ff
         var x = event.clientX - myEditableBuilding.canvas.getBoundingClientRect().left;

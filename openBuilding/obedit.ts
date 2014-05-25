@@ -197,6 +197,11 @@ class EditableBuilding extends Building {
             this.selectedObject.draw(this.canvas, this.frame, this.scaleFactor);
     }
 
+    destroy() {
+        buildingList[this['id']] = null;
+        myEditableBuilding = null;
+    }
+
     static mouse_down(event) {
         //due to offsetX not working in ff
         var x = event.clientX - myEditableBuilding.canvas.getBoundingClientRect().left;
